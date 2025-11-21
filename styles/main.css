@@ -105,8 +105,28 @@ body {
 
 
     div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
         width: 20dvw;
         height: 20dvw;
         background-color: hsla(0,0%,100%,0.1);
+    }
+
+    .e_img  {
+        width: 5dvw;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .e_name {
+        font-weight: 800;
+        font-size: 2rem;
+    }
+
+    .e_tags { 
+        margin-bottom: -5rem;
     }
 }   
