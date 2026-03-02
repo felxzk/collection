@@ -3,8 +3,8 @@ const testArray = [
     { name: 'Vivaldi', imagePath: 'vivaldi.svg', description: `hi this is my description for Vivaldi.`, tags: [`apps`, `browsers`] },
     { name: 'Ventoy', description: `Ventoy is pretty cool DOWNLOAD IT.`, tags: [`apps`, `ISOs`, `tools`], featured: true },
     { name: 'CSSHero', description: `CSSHero has a variety of tools. I've only really used the gradient one.`, tags: [`development`, `design`, `tools`, 
-        'sites'
-    ]}
+        'sites']},
+    { name: 'Google Chrome', imagePath: 'chrome.png', description: `Google Chrome is a web browser developed by Google. It is known for its speed, simplicity, and security features.`, tags: [`apps`, `browsers`] },
 ];  
 
 // log the array to the console
