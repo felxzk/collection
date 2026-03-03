@@ -59,9 +59,17 @@ body {
     background-image:
         radial-gradient(at 85% 6%, hsla(260,100%,27%,1) 0px, transparent 50%),
         radial-gradient(at 22% 72%, hsla(266,100%,17%,1) 0px, transparent 50%);
-    height: 100dvh;
+    min-height: 100dvh;
     color: white;
-    font-family: inter; /*need to import*/
+    font-family: 'Inter', sans-serif; /*need to import*/
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2.5rem;
+    align-items: center;
 }
 
 .title-wrapper { 
@@ -69,28 +77,12 @@ body {
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    margin-left: 1rem;
-    margin-top: 1rem;
     span { 
         font-weight: 700;
         font-size: 3rem;
     }
 
 }
-/* 
-.main-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-
-
-    p { 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: white;
-    }
-} */
 
 .item-wrapper {
     display: flex;
@@ -103,29 +95,63 @@ body {
     margin-bottom: 2rem; */
 
 
-
-    div {
+    .item {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 1.5rem;
-        width: 20dvw;
-        height: 20dvw;
+        width: clamp(9rem, 20dvw, 18rem);
+        height: clamp(9rem, 20dvw, 18rem);
         background-color: hsla(0,0%,100%,0.1);
+        border-radius: .5rem;
     }
 
-    .e_img  {
-        width: 5dvw;
+    .e_img {
+        width: clamp(2rem, 5dvw, 4.5rem);
         height: auto;
         object-fit: cover;
     }
 
     .e_name {
         font-weight: 800;
-        font-size: 2rem;
+        font-size: clamp(.75rem, 2dvw, 1.5rem);
     }
 
     .e_tags { 
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .5rem;
+
+        * { 
+            background: red;
+            color: white;
+            padding: .25rem;
+            border-radius: .15rem;
+        }
+    }
+
+    .e_desc{
+        font-size: clamp(.75rem, 1.5dvw, 1rem);
+    }
+
+    .e_download { 
+        a {
+            all: unset; 
+            color: white;
+            cursor: pointer;
+        }
     }
 }   
+
+/* styling for the search bar */
+form { 
+    
+    input{
+        all: unset; 
+        border: 1px solid white;
+        border-radius: .5rem;
+        padding: .25rem;
+    }
+}
