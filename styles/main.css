@@ -55,13 +55,21 @@ table {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
-    background-color:hsla(0,0%,0%,1);
+    min-height: 100dvh;
+    min-width: 100dvw;
+    color: white;
+    font-family: 'Inter', sans-serif; /*need to import*/
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: hsla(0,0%,0%,1);
     background-image:
         radial-gradient(at 85% 6%, hsla(260,100%,27%,1) 0px, transparent 50%),
         radial-gradient(at 22% 72%, hsla(266,100%,17%,1) 0px, transparent 50%);
-    min-height: 100dvh;
-    color: white;
-    font-family: 'Inter', sans-serif; /*need to import*/
 }
 
 header {
@@ -141,6 +149,9 @@ header {
             all: unset; 
             color: white;
             cursor: pointer;
+            background: blue;
+            padding: .5rem .75rem;
+            border-radius: .5rem;
         }
     }
 }   

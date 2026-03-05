@@ -6,13 +6,13 @@ const listingArray = [
         'sites']},
         { name: 'HDDGuru', imagePath: 'hdd.png', description: `Low-Level format tool helped me recover a disk that I may have otherwise tossed, due to thinking it was done for (in reality, it was just incorrectly formatted).`, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
         { name: 'IHatePDF', imagePath: 'ihatepdf.svg', description: ``, tags: [`sites`, `tools`], download: 'https://ihatepdf.site/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
-        { name: '', imagePath: '', description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: 'Bitwarden', imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://bitwarden.com/download' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
+        { name: ``, imagePath: ``, description: ``, tags: [`apps`, `tools`], download: 'https://hddguru.com/software/HDD-LLF-Low-Level-Format-Tool/' },
     ];  
 
 // log the array to the console
