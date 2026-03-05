@@ -54,10 +54,14 @@ table {
 /* inter font import */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root {
+    --bs-body-color: #ff0000;
+}
+
 body {
     min-height: 100dvh;
     min-width: 100dvw;
-    color: white;
+    color: white !important;
     font-family: 'Inter', sans-serif; /*need to import*/
 }
 
@@ -123,7 +127,8 @@ header {
 
     .e_name {
         font-weight: 800;
-        font-size: clamp(.75rem, 2dvw, 1.5rem);
+        /* clamp(min, pref, max); */
+        font-size: clamp();
     }
 
     .e_tags { 
