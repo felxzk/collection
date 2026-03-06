@@ -8,31 +8,30 @@ const listingArray = [
 ];
 
 function renderItems(array) {
-    const itemWrapper = document.querySelector('.item-wrapper');
+    const itemWrapper = document.querySelector('.flex.flex-wrap');
     itemWrapper.innerHTML = '';
 
-    // filter out empty/incomplete entries
     const validItems = array.filter(item => item.name.trim() !== '');
 
     validItems.forEach(element => {
         let itemElement = document.createElement("div");
-        itemElement.classList.add("item");
+        itemElement.className = "card flex flex-col items-center justify-center gap-lg";
 
-        const allTags = element.tags.map(tag => `<span>${tag}</span>`).join('');
+        const allTags = element.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
         const downloadHTML = element.download
-            ? `<span class="e_download"><a href="${element.download}" target="_blank" rel="noopener noreferrer">Link</a></span>`
+            ? `<a class="btn-link" href="${element.download}" target="_blank" rel="noopener noreferrer">Link</a>`
             : '';
 
         const imgHTML = element.imagePath
-            ? `<img class="e_img" src="./assets/logos/${element.imagePath}" alt="${element.name} logo">`
+            ? `<img class="logo" src="./assets/logos/${element.imagePath}" alt="${element.name} logo">`
             : '';
 
         itemElement.innerHTML = `
-            <h2 class="e_name">${element.name}</h2>
+            <h2 class="fw-black">${element.name}</h2>
             ${imgHTML}
-            <p class="e_desc">${element.description}</p>
-            <div class="e_tags">${allTags}</div>
+            <p class="text-sm">${element.description}</p>
+            <div class="flex flex-wrap gap-sm">${allTags}</div>
             ${downloadHTML}
         `;
 
