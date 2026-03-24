@@ -150,3 +150,11 @@ form input {
     border-radius: var(--radius-md);
     padding: .25rem;
 }
+
+.element_description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* number of lines */
+    overflow: hidden;
+    margin: 0 2rem;
+}

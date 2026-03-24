@@ -15,11 +15,11 @@ async function loadItems() {
         let itemElement = document.createElement("div");
         itemElement.className = "card flex flex-col items-center justify-center gap-lg";
 
-        const allTags = element.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const allTags = (element.tags ?? []).map(tag => `<span class="tag">${tag}</span>`).join('');
 
-        const downloadHTML = element.download
-            ? `<a class="btn-link" href="${element.download}" target="_blank" rel="noopener noreferrer">Link</a>`
-            : '';
+        const downloadHTML = element.link
+    ? `<a class="btn-link" href="${element.link}" target="_blank" rel="noopener noreferrer">Link</a>`
+    : '';
 
         const imgHTML = element.image_path
             ? `<img class="logo" src="./assets/logos/${element.image_path}" alt="${element.name} logo">`
@@ -28,7 +28,7 @@ async function loadItems() {
         itemElement.innerHTML = `
             <h2 class="fw-black">${element.name}</h2>
             ${imgHTML}
-            <p class="text-sm">${element.description}</p>
+            <p class="text-sm element_description">${element.description}</p>
             <div class="flex flex-wrap gap-sm">${allTags}</div>
             ${downloadHTML}
         `;
