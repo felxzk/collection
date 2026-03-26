@@ -3,9 +3,23 @@ const SUPABASE_KEY = 'sb_publishable_KqrUa1s9ahedHpldVSXRrw_m3KZp5i8';
 
 const { createClient } = supabase;
 const client = createClient(SUPABASE_URL, SUPABASE_KEY);
+window.supabaseClient = client;
+
+let displayType = `alphabetical`;
 
 async function loadItems() {
-    const { data, error } = await client.from('items').select('*');
+    let query = client.from('items').select('*');
+
+    if (displayType === 'alphabetical') {
+        query = query.order('name', { ascending: true });
+    } else if (displayType === 'newest') {
+        query = query.order('created_at', { ascending: false });
+    } else if (displayType === 'oldest') {
+        query = query.order('created_at', { ascending: true });
+    }
+
+    const { data, error } = await query;
+
     if (error) { console.error(error); return; }
 
     const itemWrapper = document.querySelector('.item-wrapper');
