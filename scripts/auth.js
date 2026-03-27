@@ -2,9 +2,9 @@
 // window.supabaseClient was set by main.js, so we reuse the same instance.
 
 function updateUI(user) {
-    const btn = document.getElementById('auth-btn');
+    const btn = document.getElementById('google-auth');
     if (user) {
-        btn.textContent = `hi there, (${user.name})!`;
+        btn.textContent = `howdy, ${user.user_metadata.name}!`;
         btn.onclick = signOut;
     } else {
         btn.textContent = 'sign in with google';

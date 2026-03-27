@@ -6,26 +6,13 @@ const client = createClient(SUPABASE_URL, SUPABASE_KEY);
 window.supabaseClient = client;
 
 let displayType = `alphabetical`;
+let listingArray = [];
 
-async function loadItems() {
-    let query = client.from('items').select('*');
-
-    if (displayType === 'alphabetical') {
-        query = query.order('name', { ascending: true });
-    } else if (displayType === 'newest') {
-        query = query.order('created_at', { ascending: false });
-    } else if (displayType === 'oldest') {
-        query = query.order('created_at', { ascending: true });
-    }
-
-    const { data, error } = await query;
-
-    if (error) { console.error(error); return; }
-
+function renderItems(items) {
     const itemWrapper = document.querySelector('.item-wrapper');
     itemWrapper.innerHTML = '';
 
-    data.forEach(element => {
+    items.forEach(element => {
         let itemElement = document.createElement("div");
         itemElement.className = "card flex flex-col items-center justify-center gap-lg";
 
@@ -51,4 +38,30 @@ async function loadItems() {
     });
 }
 
+async function loadItems() {
+    let query = client.from('items').select('*');
+
+    if (displayType === 'alphabetical') {
+        query = query.order('name', { ascending: true });
+    } else if (displayType === 'newest') {
+        query = query.order('created_at', { ascending: false });
+    } else if (displayType === 'oldest') {
+        query = query.order('created_at', { ascending: true });
+    }
+
+    const { data, error } = await query;
+    if (error) { console.error(error); return; }
+
+    listingArray = data;
+    renderItems(listingArray);
+}
+
 document.addEventListener('DOMContentLoaded', loadItems);
+
+// adding items
+
+async function addItem(){
+    const { error } = await client
+    .from('items')
+    .insert({ name: 'Mordor', image_path: 'vivaldi.svg', description: 'added via js', link: 'https://google.com/' })
+}

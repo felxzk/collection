@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fel's collection</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/main.js" defer></script>
+
+</head>
+<body>
+    <h1>add to the collection</h1>
+
+    <div class="unauthenticated">
+        <h1>whoops....it looks like you're not supposed to be here!</h1>
+        <h3>it's great that you have ideas, but please email them!</h3>
+        <button>send em over</button> <!--make a mailto link-->
+    </div>
+
+    <div class="authenticated">
+        <h1>hey there, [name]!</h1>
+        <form onsubmit="createRow()">
+            <input type="text"> <!--name of the application-->
+            <input type="text"> <!--link-->
+            <input type="text">
+        </form>
+    </div>
+</body>
+</html>
