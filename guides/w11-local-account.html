@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fel's collection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../scripts/main.js" defer></script>
+    <script src="../scripts/anim.js" type="module"></script>
+    <script src="../scripts/search.js" defer></script>
+    <script src="../scripts/auth.js" defer></script>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <header class="">
+        <h1>Creating a Local Account on Windows 11</h1>
+        <ul>
+            <p>microsoft, in recent months, has made this ever more difficult to accomplish. however, it still remains possible. </p>
+            <li>while in the OOBE setup, once you've reached the screen prompting for your country, press Shift+F10.</li>
+            <li>a cmd window should appear. input the command OOBE\BYPASSNRO and your machine should reboot. this removes the requirement of an online account in the windows setup.</li>
+            <li>once rebooted, hit Shift+F10 once more, and input ipconfig /release , then press enter. this will, in a sense, dislocate your internet so that it is temporarily unavailable on this machine.</li>
+            <li>continue with installation, and if you are presented with a screen asking you to connect to the internet, select the option that reads 'I don't have internet', then 'continue with limited setup'.</li>
+        </ul>
+        <hr>
+        <h3>that's a lot of work...thankfully, there's another way out of this!</h3>
+        <ul>
+            <li>download rufus, and download/import the windows 11 iso.</li>            
+            <li>once this is imported, click 'start', and you should be presented a dialog box with a few options.</li>
+            <li>in these options, there is one to remove the requirement for an online account, and if you want to go a step further, there's one directly below it which pre-creates the local account for you.</li>
+        </ul>
+    </header>
+</body>
+
+</html>
