@@ -7,6 +7,8 @@ window.supabaseClient = client;
 
 let displayType = `alphabetical`;
 let listingArray = [];
+window.listingArray = listingArray;
+window.renderItems = renderItems;
 
 function renderItems(items) {
     const itemWrapper = document.querySelector('.item-wrapper');
@@ -14,13 +16,7 @@ function renderItems(items) {
 
     items.forEach(element => {
         let itemElement = document.createElement("div");
-        itemElement.className = "card flex flex-col items-center justify-center gap-lg";
-
-        const allTags = (element.tags ?? []).map(tag => `<span class="tag">${tag}</span>`).join('');
-
-        const downloadHTML = element.link
-    ? `<a class="btn-link" href="${element.link}" target="_blank" rel="noopener noreferrer">Link</a>`
-    : '';
+        itemElement.className = "card flex flex-col items-center gap-lg";
 
         const imgHTML = element.image_path
             ? `<img class="logo" src="./assets/logos/${element.image_path}" alt="${element.name} logo">`
@@ -30,9 +26,9 @@ function renderItems(items) {
             <h2 class="fw-black">${element.name}</h2>
             ${imgHTML}
             <p class="text-sm element_description">${element.description}</p>
-            <div class="flex flex-wrap gap-sm">${allTags}</div>
-            ${downloadHTML}
         `;
+
+        itemElement.addEventListener('click', () => openCard(element, itemElement));
 
         itemWrapper.appendChild(itemElement);
     });
@@ -53,7 +49,9 @@ async function loadItems() {
     if (error) { console.error(error); return; }
 
     listingArray = data;
+    window.listingArray = listingArray;
     renderItems(listingArray);
+    document.dispatchEvent(new CustomEvent('itemsLoaded'));
 }
 
 document.addEventListener('DOMContentLoaded', loadItems);
