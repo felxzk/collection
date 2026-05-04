@@ -18,5 +18,5 @@ const observer = new MutationObserver((mutations) => {
     }
 });
 
-observer.observe(itemWrapper, { childList: true });
+if (itemWrapper) observer.observe(itemWrapper, { childList: true });
 

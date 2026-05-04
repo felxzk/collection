@@ -1,6 +1,18 @@
 let activeTag = null;
+let activeSort = 'az';
 
-// Returns items matching both the current search query and active tag filter.
+const SORT_LABELS = { az: 'A → Z', za: 'Z → A', newest: 'newest first', oldest: 'oldest first' };
+
+function getSortedItems(items) {
+    const sorted = [...items];
+    if (activeSort === 'az')     sorted.sort((a, b) => a.name.localeCompare(b.name));
+    else if (activeSort === 'za')     sorted.sort((a, b) => b.name.localeCompare(a.name));
+    else if (activeSort === 'newest') sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    else if (activeSort === 'oldest') sorted.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    return sorted;
+}
+
+// Returns items matching both the current search query and active tag filter, then sorted.
 function getFilteredItems(query) {
     let results = window.listingArray ?? [];
 
@@ -17,7 +29,7 @@ function getFilteredItems(query) {
         );
     }
 
-    return results;
+    return getSortedItems(results);
 }
 
 // Called from oninput on the search field.
@@ -124,11 +136,70 @@ function selectTag(tag) {
     window.renderItems(getFilteredItems(query));
 }
 
+// --- Sort dropdown ---
+
+function initSortDropdown() {
+    const btn = document.getElementById('sort-btn');
+    const dropdown = document.getElementById('sort-dropdown');
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && e.target !== btn) {
+            dropdown.classList.remove('open');
+        }
+    });
+
+    dropdown.querySelectorAll('.category-option').forEach(el => {
+        el.addEventListener('click', () => selectSort(el.dataset.sort));
+    });
+}
+
+function selectSort(sort) {
+    activeSort = sort;
+    document.getElementById('sort-btn').textContent = SORT_LABELS[sort];
+    document.querySelectorAll('#sort-dropdown .category-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.sort === sort);
+    });
+    document.getElementById('sort-dropdown').classList.remove('open');
+    const query = document.getElementById('search').value.trim();
+    window.renderItems(getFilteredItems(query));
+}
+
+// --- Reset ---
+
+function resetFilters() {
+    activeTag = null;
+    activeSort = 'az';
+    document.getElementById('search').value = '';
+
+    document.querySelectorAll('#category-dropdown .category-option').forEach(el => {
+        el.classList.toggle('active', el.textContent === 'all');
+    });
+    document.getElementById('category-btn').textContent = 'all categories';
+    document.getElementById('category-dropdown').classList.remove('open');
+
+    document.getElementById('sort-btn').textContent = SORT_LABELS.az;
+    document.querySelectorAll('#sort-dropdown .category-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.sort === 'az');
+    });
+    document.getElementById('sort-dropdown').classList.remove('open');
+
+    window.renderItems(getFilteredItems(''));
+}
+
 // --- Init ---
 
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('search');
     input.addEventListener('blur', hideSuggestions);
+    document.getElementById('reset-filters').addEventListener('click', resetFilters);
 });
 
-document.addEventListener('itemsLoaded', initCategoryDropdown);
+document.addEventListener('itemsLoaded', () => {
+    initCategoryDropdown();
+    initSortDropdown();
+});

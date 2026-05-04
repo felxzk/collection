@@ -25,19 +25,26 @@
             <div id="search-suggestions" class="search-suggestions" hidden></div>
         </div>
 
-        <div class="auth-container">
-            <button id="auth-trigger" class="btn-auth">log in</button>
-            <div id="auth-popover" class="auth-popover">
-                <div id="auth-options">
-                    <button id="google-auth" class="btn-provider">sign in with google</button>
-                    <button id="github-auth" class="btn-provider">sign in with github</button>
-                    <div class="why-no-signin">
-                        <button class="why-toggle" id="why-toggle">why no traditional sign in?</button>
-                        <p class="why-text" id="why-text">insert text</p>
+        <div class="header-right">
+            <nav class="site-nav">
+                <a href="add.html">add</a>
+                <a href="guides.html">guides</a>
+            </nav>
+
+            <div class="auth-container">
+                <button id="auth-trigger" class="btn-auth">log in</button>
+                <div id="auth-popover" class="auth-popover">
+                    <div id="auth-options">
+                        <button id="google-auth" class="btn-provider">sign in with google</button>
+                        <button id="github-auth" class="btn-provider">sign in with github</button>
+                        <div class="why-no-signin">
+                            <button class="why-toggle" id="why-toggle">why no traditional sign in?</button>
+                            <p class="why-text" id="why-text">I don't feel like coming up with a whole authentication service, and having to store everyone's passwords for one little site. who doesn't have a Google account these days?</p>
+                        </div>
                     </div>
-                </div>
-                <div id="auth-user" hidden>
-                    <button id="sign-out-btn" class="btn-provider">sign out</button>
+                    <div id="auth-user" hidden>
+                        <button id="sign-out-btn" class="btn-provider">sign out</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,6 +56,16 @@
             <button id="category-btn" class="btn-category">all categories</button>
             <div id="category-dropdown" class="category-dropdown"></div>
         </div>
+        <div class="category-filter">
+            <button id="sort-btn" class="btn-category">A → Z</button>
+            <div id="sort-dropdown" class="category-dropdown">
+                <button class="category-option active" data-sort="az">A → Z</button>
+                <button class="category-option" data-sort="za">Z → A</button>
+                <button class="category-option" data-sort="newest">newest first</button>
+                <button class="category-option" data-sort="oldest">oldest first</button>
+            </div>
+        </div>
+        <button id="reset-filters" class="btn-reset" title="Reset filters" aria-label="Reset filters">↺</button>
     </div>
 
     <section class="item-wrapper flex flex-wrap justify-center items-center gap-md">

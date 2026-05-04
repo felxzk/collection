@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add entry — fel's collection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/anim.js" type="module"></script>
+    <script src="scripts/auth.js" defer></script>
+    <script src="scripts/add.js" defer></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+
+        <div class="site-identity">
+            <a href="index.html" class="site-title-link">
+                <span id="site-title" class="fw-black">fel's collection</span>
+            </a>
+            <small class="text-muted">made it out the bookmarks bar</small>
+        </div>
+
+        <div class="auth-container">
+            <button id="auth-trigger" class="btn-auth">log in</button>
+            <div id="auth-popover" class="auth-popover">
+                <div id="auth-options">
+                    <button id="google-auth" class="btn-provider">sign in with google</button>
+                    <button id="github-auth" class="btn-provider">sign in with github</button>
+                    <div class="why-no-signin">
+                        <button class="why-toggle" id="why-toggle">why no traditional sign in?</button>
+                        <p class="why-text" id="why-text">I don't feel like coming up with a whole authentication service, and having to store everyone's passwords for one little site. who doesn't have a Google account these days?</p>
+                    </div>
+                </div>
+                <div id="auth-user" hidden>
+                    <button id="sign-out-btn" class="btn-provider">sign out</button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="add-page">
+
+        <!-- Loading -->
+        <div id="state-loading" class="state-card">
+            <div class="state-spinner"></div>
+            <p class="state-label text-muted">checking access...</p>
+        </div>
+
+        <!-- Not signed in -->
+        <div id="state-signin" class="state-card" hidden>
+            <div class="state-icon">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="21" width="24" height="17" rx="3" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                    <path d="M 15 21 V 15 C 15 9.5 29 9.5 29 15 V 21" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    <circle cx="22" cy="30" r="2.5" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="20.75" y="30" width="2.5" height="3.5" rx="1" fill="rgba(255,255,255,0.4)"/>
+                </svg>
+            </div>
+            <h2 class="state-title">sign in first</h2>
+            <p class="state-desc text-muted">you need to be signed in to add new entries.</p>
+            <div class="state-actions">
+                <button id="card-google-auth" class="btn-provider">sign in with google</button>
+                <button id="card-github-auth" class="btn-provider">sign in with github</button>
+            </div>
+        </div>
+
+        <!-- Insufficient permissions -->
+        <div id="state-noperms" class="state-card" hidden>
+            <div class="state-icon">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="22" cy="22" r="20" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                    <circle cx="15.5" cy="18" r="2.5" fill="rgba(255,255,255,0.45)"/>
+                    <circle cx="28.5" cy="18" r="2.5" fill="rgba(255,255,255,0.45)"/>
+                    <path d="M 14 31 Q 22 24 30 31" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                </svg>
+            </div>
+            <h2 class="state-title">whoops....</h2>
+            <p class="state-desc text-muted">looks like you don't have sufficient permissions. are you signed into the right account?</p>
+            <button id="noperms-signout" class="btn-provider">sign out</button>
+        </div>
+
+        <!-- Form -->
+        <div id="state-form" class="state-card state-form-card" hidden>
+            <h2 class="state-title">add new entry</h2>
+            <form id="add-form" novalidate>
+
+                <div class="form-group">
+                    <label class="form-label" for="field-name">name <span class="form-required">*</span></label>
+                    <input class="form-control" id="field-name" name="name" type="text" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="field-link">link <span class="form-required">*</span></label>
+                    <input class="form-control" id="field-link" name="link" type="url" required placeholder="https://...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="field-desc">description <span class="form-required">*</span></label>
+                    <textarea class="form-control form-textarea" id="field-desc" name="description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="field-tags">tags</label>
+                    <input class="form-control" id="field-tags" name="tags" type="text" placeholder="design, tools, browser" autocomplete="off">
+                    <p class="form-hint">comma-separated</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="field-image">image path</label>
+                    <input class="form-control" id="field-image" name="image_path" type="text" placeholder="vivaldi.svg" autocomplete="off">
+                    <p class="form-hint">filename from assets/logos/ — leave blank if none</p>
+                </div>
+
+                <p id="form-error" class="form-error" hidden></p>
+
+                <button type="submit" class="form-submit">add entry</button>
+            </form>
+        </div>
+
+        <!-- Success -->
+        <div id="state-success" class="state-card" hidden>
+            <div class="state-icon">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="22" cy="22" r="20" stroke="rgba(134,239,172,0.35)" stroke-width="1.5"/>
+                    <path d="M 13 22 L 20 29 L 32 15" stroke="#86efac" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <h2 class="state-title">added!</h2>
+            <p class="state-desc text-muted">the entry has been saved to the collection.</p>
+            <div class="state-actions">
+                <a href="index.html" class="btn-primary" style="text-align:center; display:block; box-sizing:border-box; text-decoration:none;">go home</a>
+                <button id="add-another-btn" class="btn-secondary">add another</button>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

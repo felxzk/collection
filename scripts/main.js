@@ -12,6 +12,7 @@ window.renderItems = renderItems;
 
 function renderItems(items) {
     const itemWrapper = document.querySelector('.item-wrapper');
+    if (!itemWrapper) return;
     itemWrapper.innerHTML = '';
 
     items.forEach(element => {
@@ -54,7 +55,9 @@ async function loadItems() {
     document.dispatchEvent(new CustomEvent('itemsLoaded'));
 }
 
-document.addEventListener('DOMContentLoaded', loadItems);
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.item-wrapper')) loadItems();
+});
 
 // adding items
 
